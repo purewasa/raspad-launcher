@@ -13,7 +13,7 @@ gid = pwd.getpwnam(username).pw_gid
 group_name = grp.getgrgid(gid)[0]
 struct = platform.architecture()[0]
 
-user_home = os.popen(f'getent passwd {username} | cut -d: -f 6').readline().strip()
+user_home = pwd.getpwnam(username).pw_dir
 
 errors = []
 
