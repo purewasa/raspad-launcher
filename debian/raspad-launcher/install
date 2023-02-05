@@ -117,7 +117,7 @@ def install():
             cmd=f'run_command("sudo chown -R {username}:{group_name} {user_home}/.config/lxpanel")')
     do(msg="replace menu icon",
         cmd=f'run_command("cp ./panel {user_home}/.config/lxpanel/LXDE-pi/panels/panel")')
-    do(msg="Reflash panel",
+    do(msg="Refresh panel",
         cmd='run_command("export DISPLAY=:0.0 && lxpanelctl restart")')
 
     # print("Install Onboard Keyboard")

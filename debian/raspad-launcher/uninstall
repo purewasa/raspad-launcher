@@ -54,7 +54,7 @@ def uninstall():
         do(msg="Remove panel settings",
             cmd=f'run_command("rm -r {user_home}/.config/lxpanel/LXDE-pi/panels/panel")')
 
-    do(msg="Reflash panel",
+    do(msg="Refresh panel",
         cmd='run_command("lxpanelctl restart")')
 
     # print("Uninstall MatchBox Keyboard")
