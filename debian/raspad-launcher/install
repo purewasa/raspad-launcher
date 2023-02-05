@@ -22,7 +22,7 @@ install_path = os.getcwd()
 
 usage = '''
 Usage:
-    sudo python3 install.py [option]
+    sudo python3 install [option]
 
 Options:
                --no-dep     Do not download dependencies
