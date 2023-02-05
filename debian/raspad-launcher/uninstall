@@ -3,17 +3,17 @@ import os, sys
 
 errors = []
 
-avaiable_options = ['-h', '--help', '--no-dep']
+avaiable_options = ['-h', '--help']
 
 usage = '''
 Usage:
-    sudo python3 install.py [option]
+    sudo python3 uninstall [option]
 
 Options:
-               --no-dep    Do not download dependencies
     -h         --help      Show this help text and exit
 '''
-def install():
+
+def uninstall():
     options = []
     if len(sys.argv) > 1:
         options = sys.argv[1:]
@@ -64,7 +64,7 @@ def install():
     if len(errors) == 0:
         print("Finished")
     else:
-        print("\n\nError happened in install process:")
+        print("\n\nError happened in uninstall process:")
         for error in errors:
             print(error)
         print("Try to fix it yourself, or contact service@sunfounder.com with this message")
@@ -74,7 +74,7 @@ def cleanup():
     pass
 
 class Modules(object):
-    ''' 
+    '''
         To setup /etc/modules
     '''
 
@@ -217,7 +217,7 @@ def do(msg="", cmd=""):
 
 if __name__ == "__main__":
     try:
-        install()
+        uninstall()
     except KeyboardInterrupt:
         print("Canceled.")
         cleanup()
