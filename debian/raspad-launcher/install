@@ -107,7 +107,7 @@ def install():
         cmd='run_command("cp ./bin/raspad-launcher-helper /usr/local/bin/")')
     do(msg="Add excute permission",
         cmd='run_command("chmod +x /usr/local/bin/raspad-launcher /usr/local/bin/raspad-launcher-helper")')
-    if os.path.isdir(f"{user_home}/.config/lxpanel/LXDE-pi/panels/panel"):
+    if os.path.isfile(f"{user_home}/.config/lxpanel/LXDE-pi/panels/panel"):
         do(msg="backup panel setting",
             cmd=f'run_command("cp {user_home}/.config/lxpanel/LXDE-pi/panels/panel {user_home}/.config/lxpanel/LXDE-pi/panels/panel.bak")')
     else:
