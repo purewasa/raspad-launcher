@@ -151,11 +151,11 @@ sudo ./uninstall
 #### Remove raspad launcher
 
 ```bash
-sudo rm -rf /usr/share/applications/raspad-faq.desktop
-sudo rm -rf /usr/share/applications/raspad-launcher.desktop
-sudo rm -rf /usr/share/icons/raspad.png
-sudo rm -rf /usr/local/bin/raspad-launcher
-sudo rm -rf /usr/local/bin/raspad-launcher-helper
+sudo rm -f /usr/share/applications/raspad-faq.desktop
+sudo rm -f /usr/share/applications/raspad-launcher.desktop
+sudo rm -f /usr/share/icons/raspad.png
+sudo rm -f /usr/local/bin/raspad-launcher
+sudo rm -f /usr/local/bin/raspad-launcher-helper
 ```
 
 #### Change menu back
