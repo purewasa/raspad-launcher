@@ -111,12 +111,12 @@ def install():
         do(msg="backup panel setting",
             cmd=f'run_command("cp {user_home}/.config/lxpanel/LXDE-pi/panels/panel {user_home}/.config/lxpanel/LXDE-pi/panels/panel.bak")')
     else:
-        do(msg="cp panel settings",
-            cmd=f'run_command("sudo cp -r /etc/xdg/lxpanel {user_home}/.config/")')
-        do(msg="change panel setting owner",
-            cmd=f'run_command("sudo chown -R {username}:{group_name} {user_home}/.config/lxpanel")')
+        do(msg="create panel settings directory",
+            cmd=f'run_command("mkdir -p {user_home}/.config/lxpanel/LXDE-pi/panels")')
     do(msg="replace menu icon",
         cmd=f'run_command("cp ./panel {user_home}/.config/lxpanel/LXDE-pi/panels/panel")')
+    do(msg="change panel setting owner",
+        cmd=f'run_command("sudo chown -R {username}:{group_name} {user_home}/.config/lxpanel")')
     do(msg="Refresh panel",
         cmd='run_command("export DISPLAY=:0.0 && lxpanelctl restart")')
 
