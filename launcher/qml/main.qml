@@ -33,6 +33,7 @@ ApplicationWindow {
     }
 
     property string settime
+    property string configDir: XDGDirs.getXDGConfigHomeDir() + "/raspad/";
     property int iconGridWidth: 178
     property int iconGridHeight: 200
     property int iconWidth: 130
@@ -761,7 +762,7 @@ ApplicationWindow {
     function readFile(file, raw) {
         var base = ""
         if (raw !== true) {
-            base = "file://" + XDGDirs.getXDGConfigHomeDir() + "/raspad/"
+            base = "file://" + configDir
         }
         var read = new XMLHttpRequest()
         read.open("GET", base + file, false)
@@ -793,6 +794,72 @@ ApplicationWindow {
         }
     }
 
+    function readFavoriteAppsFile() {
+        var favoriteAppsFile = "favoriteApps.txt";
+        var maxEntries = 100;
+        var defaultMsg = " ! Using default favorites.";
+
+        if (!fileinfo.isFile(configDir + favoriteAppsFile)){
+            console.log(favoriteAppsFile + " not found in "
+                        + configDir + defaultMsg);
+            return;
+        }
+
+        // Sanity check: Is file too large?
+        // A linux file name is 255 characters at most, so a line should not be longer than 256 chars!
+        if (fileinfo.size(configDir + favoriteAppsFile)
+                   > maxEntries * 256) {
+            // File too large.
+            console.log(configDir + favoriteAppsFile
+                         + " too large" + defaultMsg);
+            return;
+        }
+
+        var result = readFile(favoriteAppsFile, false);
+        if (!result) {
+            result = "";
+        }
+
+        var lines = result.split("\n");
+        var apps = [];
+        for (var i = 0; i < lines.length
+                        && apps.length < maxEntries; i++) {
+            var line = lines[i];
+            if (line.startsWith("#")) {
+                continue;
+            }
+            if (line.length > 256) {
+                // Sanity check for file name entry. File name
+                // length in Linux is 255 max, only.
+                continue;
+            }
+            if (!appData[line]) {
+                // not a valid *.desktop file name.
+                continue;
+            }
+            for (var j = 0; j < apps.length; j++) {
+                if (line === apps[j]) {
+                    // line is duplicate in favoriteAppsFile. Don't take it!
+                    break;
+                }
+            }
+            if (j === apps.length) {
+                // line is a new desktop file name.
+                apps.push(line);
+            }
+        }
+
+        if (apps.length === 0) {
+            // Avoid empty "Home" page. Use default AppList.
+            console.log("No valid *.desktop file names found in "
+                        + configDir + favoriteAppsFile
+                        + defaultMsg);
+            return;
+        }
+        // Át least one favorite app given. Use these for "Home" page.
+        categoriedAppList["Home"] = apps;
+    }
+
     // Load *.desktop files from folder lists.
     Timer {
         id: loadApplicationTimer
@@ -814,6 +881,7 @@ ApplicationWindow {
             for (var i = 0; i < appFolderListModels.length; i++) {
                 loadFromFolderListModel(appFolderListModels[i]);
             }
+            readFavoriteAppsFile()
             reloadAppList();
             visibility = "FullScreen";
             isLoadApplicationTriggered = false;
