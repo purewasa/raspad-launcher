@@ -123,6 +123,14 @@ def install():
     do(msg="Refresh panel",
         cmd='run_command("export DISPLAY=:0.0 && lxpanelctl restart")')
 
+    if not os.path.exists(f"{user_home}/.config/raspad/favoriteApps.txt"):
+        do(msg="create config directory",
+            cmd=f'run_command("mkdir -p {user_home}/.config/raspad")')
+        do(msg="cp config file",
+            cmd=f'run_command("cp ./favoriteApps.txt {user_home}/.config/raspad/favoriteApps.txt")')
+        do(msg="change config directory owner",
+            cmd=f'run_command("sudo chown -R {username}:{group_name} {user_home}/.config/raspad")')
+
     # print("Install Onboard Keyboard")
     # do(msg="install onboard",
     #     cmd='run_command("sudo apt install onboard at-spi2-core -y")')

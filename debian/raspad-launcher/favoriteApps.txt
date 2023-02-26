@@ -1,0 +1,16 @@
+# List one *.desktop file name per line.
+# Lines starting with "#", or not matching valid *.desktop file names,
+# or duplicate file names are ignored.
+# If list is empty or if all lines are ignored, the default
+# favorite applications are used.
+
+scratch3.desktop
+chromium-browser.desktop
+minecraft-pi.desktop
+mu.codewith.editor.desktop
+libreoffice-writer.desktop
+libreoffice-calc.desktop
+libreoffice-impress.desktop
+pcmanfm.desktop
+lxterminal.desktop
+raspad-faq.desktop

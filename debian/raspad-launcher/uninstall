@@ -59,6 +59,10 @@ def uninstall():
     do(msg="Refresh panel",
         cmd='run_command("lxpanelctl restart")')
 
+    if os.path.isdir(f"{user_home}/.config/raspad"):
+        do(msg="remove config directory",
+            cmd=f'run_command("rm -r {user_home}/.config/raspad")')
+
     # print("Uninstall MatchBox Keyboard")
     # do(msg="Uninstall matchbox-keyboard",
     #     cmd='run_command("apt purge matchbox-keyboard -y")')
