@@ -230,8 +230,8 @@ ApplicationWindow {
             anchors {
                 bottom: parent.bottom
                 left: parent.left
-                margins: 18
-                bottomMargin: 18
+                margins: 32
+                bottomMargin: 32
             }
             spacing: 30
             Rectangle {
