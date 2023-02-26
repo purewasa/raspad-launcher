@@ -66,4 +66,10 @@ public:
         QFileInfo finfo(path);
         return finfo.isRelative();
     }
+
+    // Returns file size in bytes or 0, if file is not found.
+    Q_INVOKABLE qint64 size(const QString &file) {
+        QFileInfo finfo(file);
+        return finfo.size();
+    }
 };
