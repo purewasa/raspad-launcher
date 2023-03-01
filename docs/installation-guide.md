@@ -11,12 +11,14 @@
       - [Replace Menu with RasPad Launcher](#replace-menu-with-raspad-launcher)
       - [Other Options](#other-options)
         - [Display Auto rotator](#display-auto-rotator)
+        - [Customize favorite Applications](#customize-favorite-applications)
   - [Uninstallation Guide](#uninstallation-guide)
     - [Quick uninstall script](#quick-uninstall-script)
     - [Uninstall manually](#uninstall-manually)
       - [Remove raspad launcher](#remove-raspad-launcher)
       - [Change menu back](#change-menu-back)
       - [Uninstall screen auto rotator](#uninstall-screen-auto-rotator)
+      - [Uninstall config directory](#uninstall-config-directory)
 
 ## Introduction
 
@@ -132,6 +134,21 @@ sudo python3 install.py
 cd ..
 ```
 
+##### Customize favorite Applications
+
+The first visible icons in raspad-launcher are located on the "Home" page. The applications of these icons can be customized by copying and editing the file favoriteApps.txt in the config directory as follows:
+
+```bash
+mkdir ~/.config/raspad
+cp ./favoriteApps.txt ~/.config/raspad
+# Edit e.g. with nano. Then press <CTRl-X y ENTER> to exit and save.
+nano ~/.config/raspad/favoriteApps.txt
+```
+
+Put one *.desktop file name on each line (e.g. chromium-browser.desktop). (See favoriteApps.txt file for more details!)
+
+The changes will become visble at the next start of raspad-launcher.
+
 ## Uninstallation Guide
 
 If somehow you don't want RasPad Launcher anymore, here's how you uninstall it.
@@ -190,4 +207,12 @@ cd raspad-auto-rotator
 sudo python3 uninstall.py
 cd ..
 rm -rf raspad-auto-rotator
+```
+
+#### Uninstall config directory
+
+If you customized the favorite applications, you might want to remove the config directory:
+
+```bash
+rm -r ~/.config/raspad
 ```
