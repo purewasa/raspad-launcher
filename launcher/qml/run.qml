@@ -48,6 +48,8 @@ Rectangle {
             startCommand()
             event.accepted = true
         }
+
+        Keys.onEscapePressed: Qt.quit()
     }
 
     Rectangle {

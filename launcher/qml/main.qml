@@ -90,6 +90,10 @@ ApplicationWindow {
         }
         color: "#f8db5e"
 
+        Component.onCompleted: forceActiveFocus()
+
+        Keys.onEscapePressed: Qt.quit()
+
         Image {
             id: logo
             source: "../images/logo.png"
