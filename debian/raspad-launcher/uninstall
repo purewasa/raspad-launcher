@@ -47,12 +47,14 @@ def uninstall():
     do(msg="Remove raspad-launcher-helper",
         cmd='run_command("rm -f /usr/local/bin/raspad-launcher-helper")')
 
-    if os.path.exists(f"{user_home}/.config/lxpanel/LXDE-pi/panels/panel.bak"):
+    panel_file = f"{user_home}/.config/lxpanel/LXDE-pi/panels/panel"
+    backup_file = f'{user_home}/{panel_file.replace("/", "_")}.bak'
+    if os.path.exists(backup_file):
         do(msg="Restore panel backup",
-            cmd=f'run_command("mv {user_home}/.config/lxpanel/LXDE-pi/panels/panel.bak {user_home}/.config/lxpanel/LXDE-pi/panels/panel")')
+            cmd=f'run_command("mv {backup_file} {panel_file}")')
     else:
         do(msg="Remove panel settings",
-            cmd=f'run_command("rm {user_home}/.config/lxpanel/LXDE-pi/panels/panel")')
+            cmd=f'run_command("rm {panel_file}")')
 
     do(msg="Refresh panel",
         cmd='run_command("lxpanelctl restart")')

@@ -107,14 +107,17 @@ def install():
         cmd='run_command("cp ./bin/raspad-launcher-helper /usr/local/bin/")')
     do(msg="Add excute permission",
         cmd='run_command("chmod +x /usr/local/bin/raspad-launcher /usr/local/bin/raspad-launcher-helper")')
-    if os.path.isfile(f"{user_home}/.config/lxpanel/LXDE-pi/panels/panel"):
+    panel_file = f"{user_home}/.config/lxpanel/LXDE-pi/panels/panel"
+    backup_file = None
+    if os.path.isfile(panel_file):
+        backup_file = f'{user_home}/{panel_file.replace("/", "_")}.bak'
         do(msg="backup panel setting",
-            cmd=f'run_command("cp {user_home}/.config/lxpanel/LXDE-pi/panels/panel {user_home}/.config/lxpanel/LXDE-pi/panels/panel.bak")')
+            cmd=f'run_command("mv -b {panel_file} {backup_file}")')
     else:
         do(msg="create panel settings directory",
             cmd=f'run_command("mkdir -p {user_home}/.config/lxpanel/LXDE-pi/panels")')
     do(msg="replace menu icon",
-        cmd=f'run_command("cp ./panel {user_home}/.config/lxpanel/LXDE-pi/panels/panel")')
+        cmd=f'run_command("cp ./panel {panel_file}")')
     do(msg="change panel setting owner",
         cmd=f'run_command("sudo chown -R {username}:{group_name} {user_home}/.config/lxpanel")')
     do(msg="Refresh panel",
@@ -140,6 +143,8 @@ def install():
 
     if len(errors) == 0:
         print("Finished")
+        if backup_file is not None:
+            print(f"Original panel setting file has been backed up to: {backup_file}")
         select = input("Installation needs to reboot. Do you want to reboot right now? (y/N): ")
         if select.lower() == "y":
             print("Reboot!")
